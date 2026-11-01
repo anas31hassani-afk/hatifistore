@@ -42,6 +42,7 @@
   --story-fg: #F5F5F7;
   --story-muted: #86868B;
   --story-track: #2C2C2E;
+  --story-top: #000000;
   --font: "IBM Plex Sans Arabic", system-ui, -apple-system, "Segoe UI", Tahoma, sans-serif;
   --font-logo: "Kufam", "IBM Plex Sans Arabic", sans-serif;
   --font-latin: "Oxanium", system-ui, sans-serif;
@@ -50,18 +51,18 @@
   :root:not([data-theme="light"]) {
     --bg: #000000; --alt: #0B0B0C; --tile: #1D1D1F; --ink: #F5F5F7; --muted: #A1A1A6; --line: #333336;
     --accent: #FF5A1F; --on-accent: #1D1D1F; --night: #1D1D1F; --on-night: #F5F5F7; --night-muted: #A1A1A6;
-    --plate: #2A2A2D; --ok: #4CC27E; --nav: rgba(0,0,0,.72); color-scheme: dark;
+    --plate: #2A2A2D; --ok: #4CC27E; --nav: rgba(0,0,0,.72); --story-top: #0B0B0C; color-scheme: dark;
   }
 }
 :root[data-theme="dark"] {
   --bg: #000000; --alt: #0B0B0C; --tile: #1D1D1F; --ink: #F5F5F7; --muted: #A1A1A6; --line: #333336;
   --accent: #FF5A1F; --on-accent: #1D1D1F; --night: #1D1D1F; --on-night: #F5F5F7; --night-muted: #A1A1A6;
-  --plate: #2A2A2D; --ok: #4CC27E; --nav: rgba(0,0,0,.72); color-scheme: dark;
+  --plate: #2A2A2D; --ok: #4CC27E; --nav: rgba(0,0,0,.72); --story-top: #0B0B0C; color-scheme: dark;
 }
 
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
-@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before { transition: none !important; animation: none !important; } }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
 body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--font); font-size: 17px; line-height: 1.6; direction: rtl; -webkit-font-smoothing: antialiased; }
 body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 30; background: var(--bg); }
 .wrap { max-width: 1040px; margin-inline: auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
@@ -102,23 +103,21 @@ a { color: inherit; }
 .hero .sub { font-size: clamp(19px, 2.4vw, 26px); color: var(--muted); font-weight: 400; }
 .hero .cta { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 18px; margin-top: 6px; }
 .hero .stage { position: relative; width: 100%; height: clamp(420px, 60vw, 600px); margin-top: 18px; }
-.hero .stage canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.hero .stage canvas { position: absolute; top: 0; left: 50%; width: 100vw; height: 100%; transform: translateX(-50%); display: block; -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 14%, #000 86%, transparent 100%); mask-image: linear-gradient(90deg, transparent 0, #000 14%, #000 86%, transparent 100%); }
 .hero .layers { position: absolute; left: 50%; top: 4%; height: 88%; aspect-ratio: 700 / 1161; max-width: 80%; transform: translateX(-50%); }
 .hero .layers::after { content: ""; position: absolute; inset: auto 8% -3% 8%; height: 28px; border-radius: 50%; background: radial-gradient(closest-side, rgba(0,0,0,.22), transparent); }
 .hero .layers img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; filter: drop-shadow(0 34px 34px rgba(0,0,0,.20)); will-change: transform; }
-.hero .layers .base { animation: rise 1.1s cubic-bezier(.2,.8,.2,1) both, bob 6s ease-in-out 1.1s infinite; }
-.hero .layers .bud { animation: drop 1.3s cubic-bezier(.2,.8,.2,1) .25s both, sway 4.6s ease-in-out 1.55s infinite; transform-origin: 68% 14%; }
-@keyframes rise { from { opacity: 0; transform: translateY(40px) scale(.96); } to { opacity: 1; transform: none; } }
-@keyframes drop { from { opacity: 0; transform: translate(-6%, -14%) rotate(-14deg); } to { opacity: 1; transform: none; } }
-@keyframes bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
-@keyframes sway { 0%, 100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-14px) rotate(-4deg); } }
-@media (prefers-reduced-motion: reduce) { .hero .layers img { animation: none !important; } }
-.hero .layers .lw { position: absolute; inset: 0; will-change: transform; }
+.hero .layers .lw { position: absolute; inset: 0; will-change: transform, opacity; opacity: 0; }
+@media (max-width: 600px) { .hero .stage canvas { -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 6%, #000 94%, transparent 100%); mask-image: linear-gradient(90deg, transparent 0, #000 6%, #000 94%, transparent 100%); } }
+#lw-case { transform-origin: 50% 74%; }
+#lw-budL { transform-origin: 29% 38%; }
+#lw-budR { transform-origin: 67% 16%; }
+.hero .stage { touch-action: pan-y; transform-origin: 50% 70%; will-change: transform; }
 .hero .copy-in { will-change: transform, opacity; }
 .price-line { font-size: 17px; color: var(--muted); }
 
 /* Scroll story: the street goes quiet as you scroll */
-.story { position: relative; height: 280vh; background: var(--story-bg); color: var(--story-fg); }
+.story { position: relative; height: 280vh; background: linear-gradient(var(--story-top), var(--story-bg) 180px); color: var(--story-fg); }
 .story-sticky { position: sticky; top: calc(env(safe-area-inset-top, 0px) + 52px); height: calc(100svh - 52px); overflow: hidden; display: grid; place-items: center; }
 .story canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
 .story-copy { position: absolute; inset-inline: 0; top: 9%; height: 1.4em; font-size: clamp(38px, 7.5vw, 84px); font-weight: 700; text-align: center; letter-spacing: -0.01em; z-index: 2; }
@@ -139,17 +138,14 @@ a { color: inherit; }
 /* Reveal on scroll (only where the browser ties it to scroll; otherwise everything simply shows) */
 @keyframes reveal { from { opacity: 0; transform: translateY(46px) scale(.97); } to { opacity: 1; transform: none; } }
 @supports (animation-timeline: view()) {
-  @media (prefers-reduced-motion: no-preference) {
-    .sec-title, .tile, .prod, .steps li, form.f, .summary, details {
-      animation: reveal linear both; animation-timeline: view(); animation-range: entry 0% entry 70%;
-    }
+  .sec-title, .tile, .prod, .steps li, form.f, .summary, details {
+    animation: reveal linear both; animation-timeline: view(); animation-range: entry 0% entry 70%;
   }
 }
 .prod .img img, .tile img { transition: transform .5s cubic-bezier(.2,.8,.2,1); }
 .prod:hover .img img { transform: translateY(-8px) scale(1.05); }
 .prod { transition: transform .4s cubic-bezier(.2,.8,.2,1), box-shadow .4s; }
 .prod:hover { transform: translateY(-4px); box-shadow: 0 24px 50px -24px rgba(0,0,0,.25); }
-@media (prefers-reduced-motion: reduce) { .prod, .prod .img img { transition: none; } .prod:hover, .prod:hover .img img { transform: none; } }
 .price-line b { color: var(--ink); font-weight: 600; }
 
 /* Section frame */
@@ -367,8 +363,9 @@ footer .contact { display: flex; flex-wrap: wrap; align-items: center; gap: 10px
       <div class="stage" role="img" aria-label="سماعتين بيض كيطيرو فوق علبة الشحن المفتوحة، والموجات ديال الصداع كتهدن حداهم">
         <canvas id="anc-field" aria-hidden="true"></canvas>
         <div class="layers">
-          <div class="lw" id="lw-base"><img class="base" src="img/h-base.webp" alt="" width="700" height="1161"></div>
-          <div class="lw" id="lw-bud"><img class="bud" src="img/h-bud.webp" alt="" width="700" height="1161"></div>
+          <div class="lw" id="lw-case"><img src="img/h-case.webp" alt="" width="700" height="1161"></div>
+          <div class="lw" id="lw-budL"><img src="img/h-budL.webp" alt="" width="700" height="1161"></div>
+          <div class="lw" id="lw-budR"><img src="img/h-bud.webp" alt="" width="700" height="1161"></div>
         </div>
       </div>
     </div>
@@ -637,13 +634,17 @@ footer .contact { display: flex; flex-wrap: wrap; align-items: center; gap: 10px
   update();
 })();
 
-// Hero: noise lines that go quiet as they reach the earbuds (the ANC idea), with slow rings.
+// Hero: noise lines that go quiet around the earbuds (the ANC idea). They react to the pointer:
+// lines bend away from it, moving fast stirs them up, and a tap sends a ripple along them.
 (() => {
   const cv = document.getElementById("anc-field");
   if (!cv) return;
   const ctx = cv.getContext("2d");
-  const still = matchMedia("(prefers-reduced-motion: reduce)");
+  const calm = matchMedia("(prefers-reduced-motion: reduce)");
+  const P = (window.__hatifiPointer = window.__hatifiPointer || { x: 0, y: 0 });
   let w = 0, h = 0, dpr = 1, colors = {}, lastColorRead = -1e9;
+  const ptr = { x: -1e4, y: -1e4, sx: -1e4, sy: -1e4, energy: 0, inside: false, lastX: 0, lastY: 0, lastT: 0 };
+  const ripples = [];
   const readColors = () => {
     const cs = getComputedStyle(document.documentElement);
     colors = { line: cs.getPropertyValue("--muted").trim() || "#6E6E73", accent: cs.getPropertyValue("--accent").trim() || "#FF5A1F" };
@@ -651,16 +652,39 @@ footer .contact { display: flex; flex-wrap: wrap; align-items: center; gap: 10px
   const resize = () => {
     const r = cv.getBoundingClientRect();
     dpr = Math.min(window.devicePixelRatio || 1, 2);
-    w = r.width; h = r.height;
+    w = cv.offsetWidth || r.width; h = cv.offsetHeight || r.height;
     cv.width = Math.round(w * dpr); cv.height = Math.round(h * dpr);
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
   };
+  const local = (cx, cy) => { const r = cv.getBoundingClientRect(); return [(cx - r.left) * (w / r.width), (cy - r.top) * (h / r.height)]; };
+  const onMove = e => {
+    const [x, y] = local(e.clientX, e.clientY), now = performance.now();
+    ptr.inside = y > -h * 0.2 && y < h * 1.2;
+    if (ptr.lastT) {
+      const v = Math.hypot(x - ptr.lastX, y - ptr.lastY) / Math.max(8, now - ptr.lastT);
+      ptr.energy = Math.min(1.4, ptr.energy + v * 0.12);
+    }
+    ptr.x = x; ptr.y = y; ptr.lastX = x; ptr.lastY = y; ptr.lastT = now;
+  };
+  addEventListener("pointermove", onMove, { passive: true });
+  cv.parentElement.addEventListener("pointerdown", e => {
+    onMove(e); ripples.push({ x: ptr.x, t: performance.now() }); if (ripples.length > 4) ripples.shift();
+    ptr.energy = Math.min(1.4, ptr.energy + 0.5);
+  }, { passive: true });
+  document.documentElement.addEventListener("pointerleave", () => { ptr.inside = false; });
+
   const smooth = (a, b, x) => { const t = Math.min(1, Math.max(0, (x - a) / (b - a))); return t * t * (3 - 2 * t); };
+  let prevMs = 0;
   const draw = (ms) => {
-    const t = ms / 1000;
+    const dt = Math.min(0.05, (ms - (prevMs || ms)) / 1000); prevMs = ms;
+    const t = ms / 1000 * (calm.matches ? 0.5 : 1);
     if (ms - lastColorRead > 1000) { readColors(); lastColorRead = ms; }
+    ptr.energy *= Math.exp(-dt * 1.8);
+    const follow = 1 - Math.exp(-dt * 9);
+    if (ptr.inside) { ptr.sx += ((ptr.sx < -1e3 ? ptr.x : ptr.x) - ptr.sx) * (ptr.sx < -1e3 ? 1 : follow); ptr.sy += (ptr.y - ptr.sy) * (ptr.sy < -1e3 ? 1 : follow); }
+    const near = ptr.inside ? 1 : 0;
     ctx.clearRect(0, 0, w, h);
-    const cx = w / 2, cy = h * 0.5, R = Math.min(w, h) * 0.30;
+    const cx = w / 2 + P.x * Math.min(w, 900) * 0.05, cy = h * 0.5 + P.y * h * 0.03, R = Math.min(w, h) * (w < 600 ? 0.2 : 0.30);
     // rings
     for (let i = 0; i < 3; i++) {
       const p = ((t * 0.12) + i / 3) % 1;
@@ -671,55 +695,125 @@ footer .contact { display: flex; flex-wrap: wrap; align-items: center; gap: 10px
       ctx.lineWidth = 1.5;
       ctx.stroke();
     }
+    const now = performance.now();
+    for (let i = ripples.length - 1; i >= 0; i--) if (now - ripples[i].t > 2600) ripples.splice(i, 1);
+    const sig = Math.max(70, Math.min(w, 1200) * 0.09), gap = Math.max(10, h * 0.035);
     // noise lines
     const lines = 7;
     for (let k = 0; k < lines; k++) {
-      const y0 = cy + (k - (lines - 1) / 2) * Math.max(10, h * 0.035);
+      const y0 = cy + (k - (lines - 1) / 2) * gap;
       ctx.beginPath();
       for (let x = 0; x <= w; x += 3) {
         const d = Math.abs(x - cx);
-        const amp = smooth(R * 0.95, R * 2.1, d) * h * 0.045;
+        const quiet = smooth(R * 0.95, R * 2.1, d);
+        let amp = quiet * h * 0.045;
         const n = Math.sin(x * 0.045 + t * 3.1 + k) * 0.6 + Math.sin(x * 0.11 - t * 4.7 + k * 2) * 0.3 + Math.sin(x * 0.23 + t * 7 + k * 3) * 0.25;
-        const y = y0 + n * amp;
+        let y = y0 + n * amp;
+        if (near) {
+          // lines part around the pointer like a lens, and shiver with the pointer's speed
+          const dx = x - ptr.sx, dy = y0 - ptr.sy;
+          const fall = Math.exp(-(dx * dx) / (2 * sig * sig));
+          const vfall = Math.exp(-(dy * dy) / (2 * (gap * 3.2) ** 2));
+          y += Math.sign(dy || 1) * fall * vfall * gap * 1.6;
+          y += fall * ptr.energy * h * 0.05 * Math.sin(x * 0.09 - t * 14 + k * 1.7);
+        }
+        for (const r of ripples) {
+          const age = (now - r.t) / 1000, front = age * 520, dist = Math.abs(x - r.x);
+          const env = Math.exp(-((dist - front) ** 2) / (2 * 60 * 60)) * Math.exp(-age * 1.4);
+          y += env * h * 0.06 * Math.sin((dist - front) * 0.08 + k * 0.6);
+        }
         x === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
       }
       const accent = k === 3;
       ctx.strokeStyle = accent ? colors.accent : colors.line;
-      ctx.globalAlpha = accent ? 0.75 : 0.28;
+      ctx.globalAlpha = accent ? 0.75 : 0.28 + 0.15 * Math.min(1, ptr.energy);
       ctx.lineWidth = accent ? 2 : 1.2;
       ctx.stroke();
     }
     ctx.globalAlpha = 1;
   };
   let raf = 0, visible = true;
-  const loop = (ms) => { draw(ms); if (!still.matches && visible) raf = requestAnimationFrame(loop); };
-  const start = () => { cancelAnimationFrame(raf); resize(); still.matches ? draw(2000) : (raf = requestAnimationFrame(loop)); };
+  const loop = (ms) => { draw(ms); if (visible) raf = requestAnimationFrame(loop); };
+  const start = () => { cancelAnimationFrame(raf); resize(); raf = requestAnimationFrame(loop); };
   new ResizeObserver(start).observe(cv);
   new IntersectionObserver(([e]) => { visible = e.isIntersecting; if (visible) start(); }).observe(cv);
-  still.addEventListener?.("change", start);
   start();
+})();
+
+// Hero motion: case + both earbuds float on their own, drift toward the pointer (or phone tilt), and settle on scroll.
+(() => {
+  const hero = document.querySelector(".hero"), stage = hero && hero.querySelector(".stage");
+  const C = document.getElementById("lw-case"), A = document.getElementById("lw-budL"), B = document.getElementById("lw-budR");
+  if (!stage || !C || !A || !B) return;
+  const calm = matchMedia("(prefers-reduced-motion: reduce)");
+  const P = (window.__hatifiPointer = window.__hatifiPointer || { x: 0, y: 0 });
+  const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
+  const out4 = x => 1 - Math.pow(1 - x, 4);
+  const outBack = x => { const c = 1.35; return 1 + (c + 1) * Math.pow(x - 1, 3) + c * Math.pow(x - 1, 2); };
+  let tx = 0, ty = 0, lastInput = -1e9, visible = true, raf = 0, prev = 0, t0 = 0;
+  const aim = (cx, cy) => {
+    const r = stage.getBoundingClientRect();
+    tx = clamp((cx - (r.left + r.width / 2)) / (r.width * 0.6), -1, 1);
+    ty = clamp((cy - (r.top + r.height / 2)) / (r.height * 0.6), -1, 1);
+    lastInput = performance.now();
+  };
+  addEventListener("pointermove", e => aim(e.clientX, e.clientY), { passive: true });
+  stage.addEventListener("pointerdown", e => aim(e.clientX, e.clientY), { passive: true });
+  addEventListener("deviceorientation", e => {
+    if (e.gamma == null || e.beta == null) return;
+    tx = clamp(e.gamma / 22, -1, 1); ty = clamp((e.beta - 50) / 22, -1, 1); lastInput = performance.now();
+  }, { passive: true });
+  stage.addEventListener("click", () => {
+    const D = window.DeviceOrientationEvent;
+    if (D && typeof D.requestPermission === "function") D.requestPermission().catch(() => {});
+  }, { once: true });
+  const put = (el, x, y, r, s, o) => { el.style.transform = `translate3d(${x.toFixed(2)}%, ${y.toFixed(2)}%, 0) rotate(${r.toFixed(2)}deg) scale(${s.toFixed(4)})`; el.style.opacity = o.toFixed(3); };
+  const frame = now => {
+    if (!t0) t0 = now;
+    const dt = Math.min(0.05, (now - (prev || now)) / 1000); prev = now;
+    const t = (now - t0) / 1000, amp = calm.matches ? 0.55 : 1;
+    // with no pointer/tilt for a while, drift on a slow orbit so the scene never freezes
+    const idle = now - lastInput > 2200;
+    const gx = idle ? Math.sin(t * 0.42) * 0.55 : tx, gy = idle ? Math.sin(t * 0.29 + 1.2) * 0.4 : ty;
+    const k = 1 - Math.exp(-dt * (idle ? 1.6 : 4.5));
+    P.x += (gx - P.x) * k; P.y += (gy - P.y) * k;
+    const s = clamp(scrollY / (hero.offsetHeight * 0.6)), sc = s * s * (3 - 2 * s);
+    const eC = out4(clamp(t / 1.0)), eA = clamp((t - 0.2) / 1.25), eB = clamp((t - 0.38) / 1.25);
+    const iA = outBack(eA), iB = outBack(eB), oA = out4(clamp(eA * 1.6)), oB = out4(clamp(eB * 1.6));
+    // case: rises in, breathes, leans a little toward the pointer
+    put(C, P.x * 1.4 * amp,
+           (1 - eC) * 9 + Math.sin(t * 0.8) * 0.7 * amp + P.y * 0.9 * amp - 3 * sc,
+           P.x * 1.6 * amp, (0.94 + 0.06 * eC) * (1 - 0.03 * sc), eC);
+    // left earbud: drops in from the left, its own float rhythm, medium depth
+    put(A, (1 - iA) * -14 + P.x * 4.2 * amp + Math.sin(t * 0.7 + 2) * 0.8 * amp + 2 * sc,
+           (1 - iA) * -26 + Math.sin(t * 1.25 + 0.9) * 1.8 * amp + P.y * 3.2 * amp + 9 * sc,
+           (1 - iA) * -32 + Math.sin(t * 0.95 + 0.3) * 3.2 * amp + P.x * 5 * amp - 5 * sc, 1, oA);
+    // right earbud: drops in from the right, faster float, closest to the viewer
+    put(B, (1 - iB) * 16 + P.x * 6.8 * amp + Math.sin(t * 0.6 + 4) * 1 * amp - 2 * sc,
+           (1 - iB) * -30 + Math.sin(t * 1.08 + 2.4) * 2.4 * amp + P.y * 4.6 * amp + 22 * sc,
+           (1 - iB) * 28 + Math.sin(t * 0.82 + 0.6) * 4.2 * amp + P.x * 7.5 * amp + 9 * sc, 1, oB);
+    // whole stage: tilted back in 3D at the top, flattens as you scroll; leans a little with the pointer
+    const f = clamp(scrollY / (innerHeight * 0.55)), flat = 1 - Math.pow(1 - f, 3);
+    const tilt = (1 - flat) * (calm.matches ? 16 : 28);
+    stage.style.transform = `perspective(1300px) translateY(${(-(1 - flat) * 2).toFixed(2)}%) rotateX(${(tilt - P.y * 5 * amp).toFixed(2)}deg) rotateY(${(P.x * 7 * amp).toFixed(2)}deg) scale(${(0.9 + 0.1 * flat).toFixed(4)})`;
+    raf = visible ? requestAnimationFrame(frame) : 0;
+  };
+  new IntersectionObserver(([e]) => { visible = e.isIntersecting; if (visible && !raf) { prev = 0; raf = requestAnimationFrame(frame); } }).observe(hero);
+  raf = requestAnimationFrame(frame);
 })();
 
 // Scroll motion: hero bud settles toward the case; the story section goes quiet as you scroll.
 (() => {
   const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
   const smooth = (a, b, x) => { const t = clamp((x - a) / (b - a)); return t * t * (3 - 2 * t); };
-  const reduce = matchMedia("(prefers-reduced-motion: reduce)");
-  const hero = document.querySelector(".hero");
-  const lwBud = document.getElementById("lw-bud"), lwBase = document.getElementById("lw-base");
+  const reduce = { matches: false };
   const story = document.getElementById("story");
   const cv = document.getElementById("story-cv"), ctx = cv.getContext("2d");
   const caps = [...document.querySelectorAll(".story-copy .cap")];
   const sBud = document.getElementById("story-bud"), bar = document.getElementById("story-bar");
   let w = 0, h = 0, storyP = 0, storyOn = false, raf = 0;
 
-  const heroScroll = () => {
-    if (reduce.matches) { lwBud.style.transform = lwBase.style.transform = ""; return; }
-    const p = clamp(scrollY / (hero.offsetHeight * 0.6));
-    const e = p * p * (3 - 2 * p);
-    lwBud.style.transform = `translate(${2 * e}%, ${24 * e}%) rotate(${9 * e}deg)`;
-    lwBase.style.transform = `translateY(${-3 * e}%) scale(${1 - 0.03 * e})`;
-  };
+  const heroScroll = () => {};
 
   const storyProgress = () => {
     const r = story.getBoundingClientRect();
