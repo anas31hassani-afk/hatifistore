@@ -126,6 +126,12 @@ a { color: inherit; }
 .story-copy .cap:not(:first-child) { opacity: 0; }
 .story-copy .hot { color: var(--accent); }
 .story-bud { position: relative; z-index: 1; width: min(44vh, 68vw); height: auto; margin-top: 10vh; filter: drop-shadow(0 40px 50px rgba(0,0,0,.7)); will-change: transform; }
+.story-sound { position: absolute; top: 18px; inset-inline-end: 18px; z-index: 3; display: inline-flex; align-items: center; gap: 8px; min-height: 40px; padding: 0 16px; border-radius: 999px; border: 1px solid rgba(255,255,255,.2); background: rgba(255,255,255,.08); color: var(--story-fg); font: 600 14px/1 var(--font); cursor: pointer; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); transition: background .25s, color .25s, border-color .25s; }
+.story-sound:hover { background: rgba(255,255,255,.16); }
+.story-sound svg { width: 18px; height: 18px; flex: none; }
+.story-sound .on { display: none; }
+.story-sound[aria-pressed="true"] { background: var(--accent); color: #1D1D1F; border-color: transparent; }
+.story-sound[aria-pressed="true"] .on { display: block; } .story-sound[aria-pressed="true"] .off { display: none; }
 .story-note { position: absolute; bottom: 6%; inset-inline: 0; text-align: center; color: var(--story-muted); font-size: 15px; z-index: 2; }
 .story-bar { position: absolute; bottom: 3.2%; left: 50%; width: 120px; height: 3px; margin-left: -60px; border-radius: 3px; background: var(--story-track); overflow: hidden; z-index: 2; }
 .story-bar i { display: block; height: 100%; width: 100%; background: var(--accent); transform-origin: right; transform: scaleX(0); }
@@ -377,6 +383,11 @@ footer .contact { display: flex; flex-wrap: wrap; align-items: center; gap: 10px
         <p class="cap"><span class="hot">وسكّت.</span></p>
       </div>
       <img class="story-bud" id="story-bud" src="img/p-single.webp" alt="سماعة واحدة بيضاء" width="900" height="1165" loading="lazy">
+      <button class="story-sound" id="story-sound" type="button" aria-pressed="false">
+        <svg class="off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4z"/><path d="m22 9-6 6M16 9l6 6"/></svg>
+        <svg class="on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M19 5a10 10 0 0 1 0 14"/></svg>
+        <span id="story-sound-t">سمع الفرق</span>
+      </button>
       <p class="story-note">عزل الضوضاء النشط <span class="lat">ANC</span></p>
       <div class="story-bar" aria-hidden="true"><i id="story-bar"></i></div>
     </div>
@@ -766,7 +777,62 @@ footer .contact { display: flex; flex-wrap: wrap; align-items: center; gap: 10px
     caps.forEach((c, i) => { c.style.opacity = fades[i]; c.style.transform = reduce.matches ? "" : `translateY(${(1 - fades[i]) * 18}px)`; });
     sBud.style.transform = reduce.matches ? "" : `rotate(${-14 + 22 * p}deg) scale(${0.88 + 0.22 * p})`;
     bar.style.transform = `scaleX(${p})`;
+    setSound();
   };
+
+  // Street noise that fades as the lines go flat (starts only after the visitor taps the button).
+  const sBtn = document.getElementById("story-sound"), sTxt = document.getElementById("story-sound-t");
+  const snd = { ctx: null, master: null, lp: null, on: false };
+  const noiseBuffer = (ctx, kind) => {
+    const len = ctx.sampleRate * 4, buf = ctx.createBuffer(2, len, ctx.sampleRate);
+    for (let ch = 0; ch < 2; ch++) {
+      const d = buf.getChannelData(ch);
+      let b0 = 0, b1 = 0, b2 = 0, b3 = 0, b4 = 0, b5 = 0, b6 = 0, last = 0;
+      for (let i = 0; i < len; i++) {
+        const w = Math.random() * 2 - 1;
+        if (kind === "brown") { last = (last + 0.02 * w) / 1.02; d[i] = last * 3.5; }
+        else {
+          b0 = 0.99886 * b0 + w * 0.0555179; b1 = 0.99332 * b1 + w * 0.0750759; b2 = 0.969 * b2 + w * 0.153852;
+          b3 = 0.8665 * b3 + w * 0.3104856; b4 = 0.55 * b4 + w * 0.5329522; b5 = -0.7616 * b5 - w * 0.016898;
+          d[i] = (b0 + b1 + b2 + b3 + b4 + b5 + b6 + w * 0.5362) * 0.11; b6 = w * 0.115926;
+        }
+      }
+    }
+    return buf;
+  };
+  const startSound = () => {
+    const AC = window.AudioContext || window.webkitAudioContext; if (!AC) return false;
+    const ctx = new AC(), master = ctx.createGain(), lp = ctx.createBiquadFilter();
+    master.gain.value = 0; lp.type = "lowpass"; lp.frequency.value = 8000; lp.Q.value = 0.4;
+    lp.connect(master); master.connect(ctx.destination);
+    const loop = (buf, gain) => { const src = ctx.createBufferSource(), g = ctx.createGain(); src.buffer = buf; src.loop = true; g.gain.value = gain; src.connect(g); return [src, g]; };
+    // city hiss
+    const [hiss, hissG] = loop(noiseBuffer(ctx, "pink"), 0.55); hissG.connect(lp);
+    // traffic rumble
+    const [rum, rumG] = loop(noiseBuffer(ctx, "brown"), 0.9); const rumF = ctx.createBiquadFilter(); rumF.type = "lowpass"; rumF.frequency.value = 160; rumG.connect(rumF); rumF.connect(lp);
+    // cars passing: a band of noise that swells slowly
+    const [car, carG] = loop(noiseBuffer(ctx, "pink"), 0.0); const carF = ctx.createBiquadFilter(); carF.type = "bandpass"; carF.frequency.value = 700; carF.Q.value = 0.8;
+    carG.connect(carF); carF.connect(lp);
+    const lfo = ctx.createOscillator(), lfoG = ctx.createGain(); lfo.frequency.value = 0.13; lfoG.gain.value = 0.35; lfo.connect(lfoG); lfoG.connect(carG.gain);
+    const lfo2 = ctx.createOscillator(), lfo2G = ctx.createGain(); lfo2.frequency.value = 0.07; lfo2G.gain.value = 260; lfo2.connect(lfo2G); lfo2G.connect(carF.frequency);
+    [hiss, rum, car, lfo, lfo2].forEach(n => n.start());
+    Object.assign(snd, { ctx, master, lp });
+    return true;
+  };
+  function setSound() {
+    if (!snd.on || !snd.ctx) return;
+    const q = smooth(0.3, 0.8, storyP), t = snd.ctx.currentTime;
+    const loud = storyOn ? Math.pow(1 - q, 1.6) : 0;
+    snd.master.gain.setTargetAtTime(0.5 * loud, t, 0.08);
+    snd.lp.frequency.setTargetAtTime(160 + 7800 * Math.pow(1 - q, 2), t, 0.08);
+  }
+  sBtn.addEventListener("click", async () => {
+    if (!snd.ctx && !startSound()) { sTxt.textContent = "الصوت ما متوفرش"; return; }
+    snd.on = !snd.on;
+    if (snd.on) { await snd.ctx.resume(); } else { snd.master.gain.setTargetAtTime(0, snd.ctx.currentTime, 0.05); setTimeout(() => { if (!snd.on) snd.ctx.suspend(); }, 300); }
+    sBtn.setAttribute("aria-pressed", snd.on); sTxt.textContent = snd.on ? "نزل وسمع كيسكت" : "سمع الفرق";
+    setSound();
+  });
 
   const loop = (ms) => { drawStory(ms); if (storyOn && !reduce.matches) raf = requestAnimationFrame(loop); };
   let ticking = false;
@@ -783,7 +849,7 @@ footer .contact { display: flex; flex-wrap: wrap; align-items: center; gap: 10px
   addEventListener("resize", () => { sizeCanvas(); onScroll(); });
   new ResizeObserver(sizeCanvas).observe(cv);
   new IntersectionObserver(([e]) => {
-    storyOn = e.isIntersecting; cancelAnimationFrame(raf);
+    storyOn = e.isIntersecting; cancelAnimationFrame(raf); setSound();
     if (storyOn) { sizeCanvas(); reduce.matches ? drawStory(0) : (raf = requestAnimationFrame(loop)); }
   }).observe(story);
   sizeCanvas(); onScroll();
