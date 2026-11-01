@@ -1,0 +1,873 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#FFFFFF" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="canonical" href="https://hatifistore.ma/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="هاتفي | Hatifi">
+<meta property="og:title" content="هاتفي | Hatifi — اكسسوارات الهاتف">
+<meta property="og:description" content="سماعات بعزل الضوضاء وشواحن سريعة. التوصيل مجاني لجميع مدن المغرب والدفع عند الاستلام.">
+<meta property="og:url" content="https://hatifistore.ma/">
+<meta property="og:image" content="https://hatifistore.ma/og.jpg">
+<meta property="og:locale" content="ar_MA">
+<meta name="twitter:card" content="summary_large_image">
+<title>هاتفي | Hatifi</title>
+<meta name="description" content="هاتفي — اكسسوارات الهاتف مختارة بعناية. توصيل مجاني لجميع مدن المغرب والدفع عند الاستلام.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=Kufam:wght@800&family=Oxanium:wght@700&display=swap">
+<style>
+/* Layout: product-first one-pager in a quiet, studio-lit style — centered hero with the product floating on light, bento feature tiles, a lineup row, a calm order form. */
+:root {
+  --bg: #FFFFFF;
+  --alt: #F5F5F7;          /* section ground */
+  --tile: #FFFFFF;
+  --ink: #1D1D1F;          /* Graphite */
+  --muted: #6E6E73;        /* Slate */
+  --line: #D2D2D7;         /* Silver */
+  --accent: #FF5A1F;       /* Signal Orange: fills and dots on light, text only on dark */
+  --on-accent: #1D1D1F;
+  --night: #000000;        /* dark tiles */
+  --on-night: #F5F5F7;
+  --night-muted: #86868B;
+  --plate: #1D1D1F;
+  --ok: #1D7A45;
+  --nav: rgba(255,255,255,.78);
+  --story-bg: #000000;     /* the scroll story is dark in both themes */
+  --story-fg: #F5F5F7;
+  --story-muted: #86868B;
+  --story-track: #2C2C2E;
+  --font: "IBM Plex Sans Arabic", system-ui, -apple-system, "Segoe UI", Tahoma, sans-serif;
+  --font-logo: "Kufam", "IBM Plex Sans Arabic", sans-serif;
+  --font-latin: "Oxanium", system-ui, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #000000; --alt: #0B0B0C; --tile: #1D1D1F; --ink: #F5F5F7; --muted: #A1A1A6; --line: #333336;
+    --accent: #FF5A1F; --on-accent: #1D1D1F; --night: #1D1D1F; --on-night: #F5F5F7; --night-muted: #A1A1A6;
+    --plate: #2A2A2D; --ok: #4CC27E; --nav: rgba(0,0,0,.72); color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #000000; --alt: #0B0B0C; --tile: #1D1D1F; --ink: #F5F5F7; --muted: #A1A1A6; --line: #333336;
+  --accent: #FF5A1F; --on-accent: #1D1D1F; --night: #1D1D1F; --on-night: #F5F5F7; --night-muted: #A1A1A6;
+  --plate: #2A2A2D; --ok: #4CC27E; --nav: rgba(0,0,0,.72); color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before { transition: none !important; animation: none !important; } }
+body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--font); font-size: 17px; line-height: 1.6; direction: rtl; -webkit-font-smoothing: antialiased; }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 30; background: var(--bg); }
+.wrap { max-width: 1040px; margin-inline: auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+h1, h2, h3 { margin: 0; font-weight: 700; line-height: 1.18; text-wrap: balance; letter-spacing: -0.01em; }
+p { margin: 0; }
+a { color: inherit; }
+.lat { font-family: var(--font-latin); direction: ltr; unicode-bidi: isolate; }
+.n { font-variant-numeric: tabular-nums; direction: ltr; unicode-bidi: isolate; }
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; border-radius: 10px; }
+
+/* Buttons and links */
+.pill { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 44px; padding: 0 22px; border-radius: 999px; border: 0; background: var(--accent); color: var(--on-accent); font: 600 16px/1 var(--font); text-decoration: none; cursor: pointer; transition: filter .2s; }
+.pill:hover { filter: brightness(1.07); }
+.pill.lg { min-height: 52px; padding: 0 30px; font-size: 17px; }
+.pill svg { width: 18px; height: 18px; }
+.more { font-weight: 500; text-decoration: none; color: var(--ink); display: inline-flex; align-items: center; gap: 4px; min-height: 44px; }
+.more::after { content: "‹"; font-size: 20px; line-height: 1; transform: translateY(-1px); }
+.more:hover { text-decoration: underline; text-underline-offset: 4px; }
+
+/* Nav */
+.nav { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20; background: var(--nav); backdrop-filter: saturate(180%) blur(20px); -webkit-backdrop-filter: saturate(180%) blur(20px); border-bottom: 1px solid color-mix(in srgb, var(--line) 60%, transparent); }
+.nav .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 52px; }
+.logo { display: flex; align-items: center; gap: 8px; text-decoration: none; }
+.logo svg { width: 28px; height: 28px; }
+.logo b { font-family: var(--font-logo); font-weight: 800; font-size: 18px; line-height: 1; }
+.nav nav { display: flex; gap: 26px; font-size: 13px; }
+.nav nav a { text-decoration: none; color: var(--muted); }
+.nav nav a:hover { color: var(--ink); }
+.nav .pill { min-height: 32px; padding: 0 14px; font-size: 13px; }
+@media (max-width: 700px) { .nav nav { display: none; } }
+
+/* Hero */
+.hero { background: var(--alt); text-align: center; overflow: hidden; }
+.hero .wrap { padding-block: 56px 0; display: flex; flex-direction: column; align-items: center; gap: 14px; }
+.eyebrow { display: inline-flex; align-items: center; gap: 8px; font-size: 15px; font-weight: 600; color: var(--muted); }
+.eyebrow i { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); }
+.hero h1 { font-size: clamp(40px, 7.6vw, 80px); font-weight: 700; }
+.hero .sub { font-size: clamp(19px, 2.4vw, 26px); color: var(--muted); font-weight: 400; }
+.hero .cta { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 18px; margin-top: 6px; }
+.hero .stage { position: relative; width: 100%; height: clamp(420px, 60vw, 600px); margin-top: 18px; }
+.hero .stage canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.hero .layers { position: absolute; left: 50%; top: 4%; height: 88%; aspect-ratio: 700 / 1161; max-width: 80%; transform: translateX(-50%); }
+.hero .layers::after { content: ""; position: absolute; inset: auto 8% -3% 8%; height: 28px; border-radius: 50%; background: radial-gradient(closest-side, rgba(0,0,0,.22), transparent); }
+.hero .layers img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; filter: drop-shadow(0 34px 34px rgba(0,0,0,.20)); will-change: transform; }
+.hero .layers .base { animation: rise 1.1s cubic-bezier(.2,.8,.2,1) both, bob 6s ease-in-out 1.1s infinite; }
+.hero .layers .bud { animation: drop 1.3s cubic-bezier(.2,.8,.2,1) .25s both, sway 4.6s ease-in-out 1.55s infinite; transform-origin: 68% 14%; }
+@keyframes rise { from { opacity: 0; transform: translateY(40px) scale(.96); } to { opacity: 1; transform: none; } }
+@keyframes drop { from { opacity: 0; transform: translate(-6%, -14%) rotate(-14deg); } to { opacity: 1; transform: none; } }
+@keyframes bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+@keyframes sway { 0%, 100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-14px) rotate(-4deg); } }
+@media (prefers-reduced-motion: reduce) { .hero .layers img { animation: none !important; } }
+.hero .layers .lw { position: absolute; inset: 0; will-change: transform; }
+.hero .copy-in { will-change: transform, opacity; }
+.price-line { font-size: 17px; color: var(--muted); }
+
+/* Scroll story: the street goes quiet as you scroll */
+.story { position: relative; height: 280vh; background: var(--story-bg); color: var(--story-fg); }
+.story-sticky { position: sticky; top: calc(env(safe-area-inset-top, 0px) + 52px); height: calc(100svh - 52px); overflow: hidden; display: grid; place-items: center; }
+.story canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.story-copy { position: absolute; inset-inline: 0; top: 9%; height: 1.4em; font-size: clamp(38px, 7.5vw, 84px); font-weight: 700; text-align: center; letter-spacing: -0.01em; z-index: 2; }
+.story-copy .cap { position: absolute; inset-inline: 0; top: 0; margin: 0; padding-inline: 16px; will-change: opacity, transform; }
+.story-copy .cap:not(:first-child) { opacity: 0; }
+.story-copy .hot { color: var(--accent); }
+.story-bud { position: relative; z-index: 1; width: min(44vh, 68vw); height: auto; margin-top: 10vh; filter: drop-shadow(0 40px 50px rgba(0,0,0,.7)); will-change: transform; }
+.story-note { position: absolute; bottom: 6%; inset-inline: 0; text-align: center; color: var(--story-muted); font-size: 15px; z-index: 2; }
+.story-bar { position: absolute; bottom: 3.2%; left: 50%; width: 120px; height: 3px; margin-left: -60px; border-radius: 3px; background: var(--story-track); overflow: hidden; z-index: 2; }
+.story-bar i { display: block; height: 100%; width: 100%; background: var(--accent); transform-origin: right; transform: scaleX(0); }
+
+/* Reveal on scroll (only where the browser ties it to scroll; otherwise everything simply shows) */
+@keyframes reveal { from { opacity: 0; transform: translateY(46px) scale(.97); } to { opacity: 1; transform: none; } }
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .sec-title, .tile, .prod, .steps li, form.f, .summary, details {
+      animation: reveal linear both; animation-timeline: view(); animation-range: entry 0% entry 70%;
+    }
+  }
+}
+.prod .img img, .tile img { transition: transform .5s cubic-bezier(.2,.8,.2,1); }
+.prod:hover .img img { transform: translateY(-8px) scale(1.05); }
+.prod { transition: transform .4s cubic-bezier(.2,.8,.2,1), box-shadow .4s; }
+.prod:hover { transform: translateY(-4px); box-shadow: 0 24px 50px -24px rgba(0,0,0,.25); }
+@media (prefers-reduced-motion: reduce) { .prod, .prod .img img { transition: none; } .prod:hover, .prod:hover .img img { transform: none; } }
+.price-line b { color: var(--ink); font-weight: 600; }
+
+/* Section frame */
+.sec { padding-block: 88px; }
+.sec.alt { background: var(--alt); }
+.sec-title { text-align: center; display: flex; flex-direction: column; gap: 10px; margin-bottom: 44px; }
+.sec-title h2 { font-size: clamp(32px, 5vw, 52px); }
+.sec-title p { color: var(--muted); font-size: 19px; }
+
+/* Bento */
+.bento { display: grid; grid-template-columns: repeat(6, 1fr); gap: 16px; }
+.tile { background: var(--alt); border-radius: 28px; padding: 32px; display: flex; flex-direction: column; gap: 8px; min-width: 0; overflow: hidden; position: relative; }
+.sec.alt .tile { background: var(--tile); }
+.tile .k { font-size: 15px; font-weight: 600; color: var(--muted); }
+.tile h3 { font-size: clamp(24px, 3.2vw, 34px); }
+.tile p { color: var(--muted); }
+.t-anc { grid-column: span 4; grid-row: span 2; background: var(--night) !important; color: var(--on-night); min-height: 460px; }
+.t-anc .k { color: var(--accent); }
+.t-anc p { color: var(--night-muted); max-width: 30ch; }
+.t-anc img { position: absolute; inset-inline-end: -4%; bottom: -8%; width: 50%; height: auto; filter: drop-shadow(0 30px 40px rgba(0,0,0,.6)); }
+.t-anc > :not(img) { position: relative; z-index: 1; max-width: 52%; }
+.t-mic, .t-usb { grid-column: span 2; }
+.t-big { font-size: clamp(44px, 6vw, 64px); font-weight: 700; line-height: 1; letter-spacing: -0.02em; margin-top: auto; }
+.t-free, .t-cod, .t-pair { grid-column: span 2; }
+.t-pair { background: var(--accent) !important; color: var(--on-accent); }
+.t-pair .k, .t-pair p { color: var(--on-accent); opacity: .8; }
+.ico { width: 40px; height: 40px; }
+@media (max-width: 860px) {
+  .bento { grid-template-columns: 1fr 1fr; }
+  .t-anc { grid-column: 1 / -1; grid-row: auto; min-height: 520px; }
+  .t-anc img { width: 62%; inset-inline-end: 19%; bottom: -10%; }
+  .t-anc > :not(img) { max-width: 100%; }
+  .t-mic, .t-usb, .t-free, .t-cod, .t-pair { grid-column: span 1; }
+  .t-pair { grid-column: 1 / -1; }
+}
+@media (max-width: 520px) { .bento { grid-template-columns: 1fr; } .tile { grid-column: 1 / -1 !important; padding: 26px; } }
+
+/* Lineup */
+.lineup { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+.prod { background: var(--tile); border-radius: 28px; padding: 28px 22px; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 10px; min-width: 0; }
+.sec:not(.alt) .prod { background: var(--alt); }
+.prod { padding: 12px 12px 26px; } .prod > :not(.img) { margin-inline: 10px; }
+.prod .img { width: calc(100% + 0px); aspect-ratio: 4 / 3; border-radius: 18px; overflow: hidden; margin-bottom: 8px; background: var(--alt); }
+.prod .img img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .6s cubic-bezier(.2,.7,.2,1); }
+.prod:hover .img img { transform: scale(1.04); }
+.prod .img svg { height: 170px; width: auto; }
+.prod .badge { font-size: 12px; font-weight: 700; color: var(--on-accent); background: var(--accent); border-radius: 999px; padding: 2px 10px; }
+.prod .badge.ghost { background: transparent; color: var(--muted); box-shadow: inset 0 0 0 1px var(--line); }
+.prod h3 { font-size: 20px; }
+.prod .spec { color: var(--muted); font-size: 14px; line-height: 1.7; min-height: 4.6em; }
+.prod .price { font-size: 17px; }
+.prod .price b { font-weight: 600; }
+.prod .price s { color: var(--muted); font-size: 14px; margin-inline-start: 6px; }
+.prod .row { display: flex; align-items: center; gap: 14px; margin-top: auto; padding-top: 8px; }
+@media (max-width: 960px) { .lineup { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 480px) { .lineup { grid-template-columns: 1fr; } }
+
+/* Product detail window */
+.prod .img, .prod h3 { cursor: pointer; }
+.prod .row { gap: 10px; }
+.more { min-height: 44px; padding: 0 16px; border-radius: 999px; border: 0; background: transparent; color: var(--ink); box-shadow: inset 0 0 0 1px var(--line); font: 600 15px/1 var(--font); cursor: pointer; transition: background .2s; }
+.more:hover { background: var(--alt); }
+html:has(dialog.pd[open]) { overflow: hidden; }
+dialog.pd { width: min(980px, calc(100vw - 32px)); max-height: calc(100svh - 48px); padding: 0; border: 0; border-radius: 28px; background: var(--tile); color: var(--ink); overflow: auto; overscroll-behavior: contain; box-shadow: 0 40px 120px rgba(0,0,0,.35); }
+dialog.pd::backdrop { background: rgba(0,0,0,.45); backdrop-filter: blur(14px) saturate(140%); -webkit-backdrop-filter: blur(14px) saturate(140%); }
+dialog.pd[open] { animation: pd-in .45s cubic-bezier(.2,.8,.2,1); }
+dialog.pd[open]::backdrop { animation: pd-fade .35s ease; }
+dialog.pd.closing { animation: pd-out .25s ease forwards; }
+dialog.pd.closing::backdrop { animation: pd-fade .25s ease reverse forwards; }
+@keyframes pd-in { from { opacity: 0; transform: translateY(18px) scale(.97); } }
+@keyframes pd-out { to { opacity: 0; transform: translateY(12px) scale(.98); } }
+@keyframes pd-fade { from { opacity: 0; } }
+.pd-in { display: grid; grid-template-columns: 1fr 1fr; gap: 0; }
+.pd-x { position: absolute; top: 14px; inset-inline-end: 14px; z-index: 3; width: 40px; height: 40px; border-radius: 50%; border: 0; background: rgba(29,29,31,.55); color: #fff; font-size: 22px; line-height: 1; cursor: pointer; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); display: grid; place-items: center; }
+.pd-gal { position: relative; background: var(--alt); padding: 14px; display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+.pd-track { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; border-radius: 18px; scrollbar-width: none; aspect-ratio: 1 / 1; }
+.pd-track::-webkit-scrollbar { display: none; }
+.pd-track img { flex: 0 0 100%; width: 100%; height: 100%; object-fit: cover; scroll-snap-align: center; display: block; }
+.pd-stage { position: relative; }
+.pd-count { direction: ltr; position: absolute; bottom: 12px; inset-inline-start: 12px; font: 600 12px/1 var(--font-latin); color: #fff; background: rgba(29,29,31,.55); border-radius: 999px; padding: 6px 10px; backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
+.pd-nav { position: absolute; top: 50%; translate: 0 -50%; width: 40px; height: 40px; border-radius: 50%; border: 0; background: rgba(255,255,255,.85); color: #1D1D1F; font-size: 20px; cursor: pointer; display: grid; place-items: center; box-shadow: 0 4px 14px rgba(0,0,0,.15); transition: opacity .2s; }
+.pd-nav[disabled] { opacity: 0; pointer-events: none; }
+.pd-prev { inset-inline-start: 12px; } .pd-next { inset-inline-end: 12px; }
+.pd-thumbs { display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none; padding: 3px; }
+.pd-thumbs button { flex: 0 0 auto; width: 64px; height: 64px; padding: 0; border: 0; border-radius: 12px; overflow: hidden; cursor: pointer; opacity: .55; outline: 2px solid transparent; outline-offset: 2px; transition: opacity .2s, outline-color .2s; background: none; }
+.pd-thumbs button[aria-current="true"] { opacity: 1; outline-color: var(--accent); }
+.pd-thumbs img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.pd-body { padding: 40px 36px 32px; display: flex; flex-direction: column; gap: 14px; min-width: 0; }
+.pd-body .badge { align-self: flex-start; font-size: 12px; font-weight: 700; color: var(--on-accent); background: var(--accent); border-radius: 999px; padding: 2px 10px; }
+.pd-body .badge.ghost { background: transparent; color: var(--muted); box-shadow: inset 0 0 0 1px var(--line); }
+.pd-body h2 { margin: 0; font-size: clamp(26px, 3vw, 34px); line-height: 1.2; letter-spacing: 0; }
+.pd-price { font-size: 22px; font-weight: 600; margin: 0; }
+.pd-price small { font-size: 15px; font-weight: 500; color: var(--muted); margin-inline-start: 10px; }
+.pd-desc { color: var(--muted); margin: 0; line-height: 1.8; }
+.pd-specs { list-style: none; margin: 4px 0 0; padding: 0; display: grid; gap: 0; border-top: 1px solid var(--line); }
+.pd-specs li { position: relative; padding: 12px 0; padding-inline-start: 19px; border-bottom: 1px solid var(--line); font-size: 15px; }
+.pd-specs li::before { content: ""; position: absolute; inset-inline-start: 0; top: calc(12px + .8em - 4px); width: 7px; height: 7px; border-radius: 50%; background: var(--accent); }
+.pd-perks { display: flex; flex-wrap: wrap; gap: 8px; margin: 2px 0 0; padding: 0; list-style: none; }
+.pd-perks li { font-size: 13px; color: var(--muted); background: var(--alt); border-radius: 999px; padding: 4px 12px; }
+.pd-cta { display: flex; gap: 10px; flex-wrap: wrap; margin-top: auto; padding-top: 8px; }
+.pd-cta .pill { flex: 1 1 auto; }
+.pd-wa { background: transparent; color: var(--ink); box-shadow: inset 0 0 0 1px var(--line); }
+@media (max-width: 760px) {
+  dialog.pd { width: 100vw; max-width: 100vw; max-height: 92svh; margin: auto 0 0; border-radius: 26px 26px 0 0; }
+  dialog.pd[open] { animation: pd-up .45s cubic-bezier(.2,.8,.2,1); }
+  dialog.pd.closing { animation: pd-down .25s ease forwards; }
+  @keyframes pd-up { from { transform: translateY(100%); } }
+  @keyframes pd-down { to { transform: translateY(100%); } }
+  .pd-in { grid-template-columns: 1fr; }
+  .pd-body { padding: 22px 20px calc(24px + env(safe-area-inset-bottom, 0px)); }
+  .pd-nav { display: none; }
+}
+@media (prefers-reduced-motion: reduce) { dialog.pd[open], dialog.pd.closing, dialog.pd[open]::backdrop { animation: none; } .pd-track { scroll-behavior: auto; } }
+
+/* Steps */
+.steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; counter-reset: s; text-align: center; }
+.steps li { counter-increment: s; display: flex; flex-direction: column; align-items: center; gap: 8px; }
+.steps li::before { content: counter(s); width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center; font: 600 18px var(--font); border: 1.5px solid var(--ink); margin-bottom: 6px; }
+.steps b { font-size: 20px; font-weight: 600; }
+.steps span { color: var(--muted); max-width: 26ch; }
+@media (max-width: 760px) { .steps { grid-template-columns: 1fr; gap: 28px; } }
+
+/* Order */
+.order { display: grid; grid-template-columns: 1.25fr 1fr; gap: 20px; align-items: start; }
+@media (max-width: 860px) { .order { grid-template-columns: 1fr; } }
+form.f { background: var(--tile); border-radius: 28px; padding: 28px; display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+form.f .full { grid-column: 1 / -1; }
+@media (max-width: 520px) { form.f { grid-template-columns: 1fr; padding: 22px; } }
+label { display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 500; color: var(--muted); min-width: 0; }
+input, select { font: 400 17px/1.4 var(--font); color: var(--ink); background: var(--bg); border: 1px solid var(--line); border-radius: 12px; padding: 13px 14px; width: 100%; min-width: 0; transition: border-color .2s, box-shadow .2s; }
+.sec.alt input, .sec.alt select { background: var(--alt); }
+input:focus, select:focus { outline: none; border-color: var(--ink); box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 25%, transparent); }
+input[type="tel"] { direction: ltr; text-align: right; }
+.qty { display: flex; align-items: center; gap: 8px; }
+.qty button { width: 48px; height: 48px; border-radius: 50%; border: 1px solid var(--line); background: var(--bg); color: var(--ink); font: 400 22px/1 var(--font); cursor: pointer; flex: none; }
+.qty input { text-align: center; font-weight: 600; }
+.err { color: #D93025; font-size: 14px; font-weight: 500; min-height: 1.2em; }
+.summary { background: var(--tile); border-radius: 28px; padding: 28px; display: flex; flex-direction: column; gap: 14px; position: sticky; top: calc(env(safe-area-inset-top, 0px) + 72px); }
+.summary h3 { font-size: 22px; }
+.summary .line { display: flex; justify-content: space-between; gap: 12px; color: var(--muted); font-size: 15px; }
+.summary .line b { color: var(--ink); font-weight: 600; }
+.summary .free { color: var(--ok); font-weight: 600; }
+.summary .total { border-top: 1px solid var(--line); padding-top: 14px; display: flex; justify-content: space-between; align-items: baseline; }
+.summary .total b { font-size: 34px; font-weight: 700; letter-spacing: -0.02em; }
+.summary .pill { width: 100%; }
+.summary small { color: var(--muted); font-size: 13px; line-height: 1.6; }
+
+/* FAQ */
+.faq { max-width: 760px; margin-inline: auto; }
+details { border-bottom: 1px solid var(--line); }
+summary { cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 22px 0; font-size: 19px; font-weight: 600; }
+summary::-webkit-details-marker { display: none; }
+summary::after { content: "+"; font-size: 26px; font-weight: 300; color: var(--muted); line-height: 1; }
+details[open] summary::after { content: "−"; }
+details p { color: var(--muted); padding-bottom: 22px; max-width: 60ch; }
+
+/* Footer */
+footer { background: var(--alt); color: var(--muted); font-size: 13px; }
+footer .wrap { padding-block: 28px 36px; display: flex; flex-direction: column; gap: 14px; }
+footer .rowf { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px; border-bottom: 1px solid var(--line); padding-bottom: 16px; }
+footer .contact { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+.copy { border: 1px solid var(--line); background: var(--bg); color: var(--ink); border-radius: 999px; padding: 6px 12px; font: 500 12px var(--font); cursor: pointer; }
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <path id="sq" d="M100.0,50.0 L99.9,68.8 L99.7,74.8 L99.3,79.1 L98.8,82.6 L98.1,85.4 L97.2,87.9 L96.2,90.0 L94.9,91.9 L93.5,93.5 L91.9,94.9 L90.0,96.2 L87.9,97.2 L85.4,98.1 L82.6,98.8 L79.1,99.3 L74.8,99.7 L68.8,99.9 L50.0,100.0 L31.2,99.9 L25.2,99.7 L20.9,99.3 L17.4,98.8 L14.6,98.1 L12.1,97.2 L10.0,96.2 L8.1,94.9 L6.5,93.5 L5.1,91.9 L3.8,90.0 L2.8,87.9 L1.9,85.4 L1.2,82.6 L0.7,79.1 L0.3,74.8 L0.1,68.8 L0.0,50.0 L0.1,31.2 L0.3,25.2 L0.7,20.9 L1.2,17.4 L1.9,14.6 L2.8,12.1 L3.8,10.0 L5.1,8.1 L6.5,6.5 L8.1,5.1 L10.0,3.8 L12.1,2.8 L14.6,1.9 L17.4,1.2 L20.9,0.7 L25.2,0.3 L31.2,0.1 L50.0,0.0 L68.8,0.1 L74.8,0.3 L79.1,0.7 L82.6,1.2 L85.4,1.9 L87.9,2.8 L90.0,3.8 L91.9,5.1 L93.5,6.5 L94.9,8.1 L96.2,10.0 L97.2,12.1 L98.1,14.6 L98.8,17.4 L99.3,20.9 L99.7,25.2 L99.9,31.2Z"/>
+    <symbol id="logo" viewBox="0 0 100 100"><use href="#sq" fill="var(--plate)"/><circle cx="31.05" cy="50" r="18.55" fill="#FF5A1F"/><circle cx="31.05" cy="50" r="7.6" fill="var(--plate)"/><circle cx="68.95" cy="50" r="18.55" fill="#FF5A1F"/><circle cx="68.95" cy="50" r="7.6" fill="var(--plate)"/></symbol>
+    <symbol id="wa" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.4.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.4.1-.7.3-.2.3-.9.9-.9 2.2s.9 2.5 1 2.7c.1.2 1.8 2.8 4.4 3.9 1.6.7 2.3.8 3.1.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.2-.2-.4-.3Z"/></symbol>
+    <!-- iPhone fast charger: adapter + cable, line style -->
+    <symbol id="ch-ip" viewBox="0 0 160 200">
+      <rect x="18" y="24" width="64" height="84" rx="16" fill="var(--tile)" stroke="var(--line)" stroke-width="2.5"/>
+      <rect x="38" y="44" width="24" height="8" rx="4" fill="var(--ink)"/>
+      <text x="50" y="86" text-anchor="middle" font-family="Oxanium, sans-serif" font-weight="700" font-size="17" fill="var(--muted)">25W</text>
+      <path d="M50 108v22c0 18 12 30 30 30h12c20 0 34-14 34-34V70" fill="none" stroke="var(--line)" stroke-width="7" stroke-linecap="round"/>
+      <rect x="116" y="40" width="20" height="32" rx="6" fill="var(--tile)" stroke="var(--line)" stroke-width="2.5"/>
+      <rect x="121" y="24" width="10" height="17" rx="2" fill="#B9B9BE"/>
+    </symbol>
+    <!-- Samsung-compatible QC charger -->
+    <symbol id="ch-qc" viewBox="0 0 160 200">
+      <rect x="18" y="24" width="64" height="84" rx="12" fill="var(--ink)"/>
+      <rect x="35" y="42" width="30" height="9" rx="2" fill="var(--bg)"/>
+      <path d="M54 66l-10 18h9l-5 15 16-21h-9l6-12z" fill="#FF5A1F"/>
+      <path d="M50 108v22c0 18 12 30 30 30h12c20 0 34-14 34-34V70" fill="none" stroke="var(--ink)" stroke-width="7" stroke-linecap="round"/>
+      <rect x="116" y="40" width="20" height="32" rx="6" fill="var(--tile)" stroke="var(--line)" stroke-width="2.5"/>
+      <rect x="121" y="26" width="10" height="15" rx="3" fill="#B9B9BE"/>
+    </symbol>
+  </defs>
+</svg>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="logo" href="#top" aria-label="هاتفي Hatifi"><svg aria-hidden="true"><use href="#logo"/></svg><b>هاتفي</b></a>
+    <nav aria-label="أقسام الصفحة">
+      <a href="#features">المزايا</a>
+      <a href="#lineup">المنتجات</a>
+      <a href="#how">كيفاش تطلب</a>
+      <a href="#faq">أسئلة</a>
+    </nav>
+    <a class="pill" href="#order" data-pick="buds">اطلب</a>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="wrap">
+      <span class="eyebrow"><i></i>التوصيل مجاني لجميع المدن</span>
+      <h1>سكّت الشارع.</h1>
+      <p class="sub">سماعات لاسلكية بعزل الضوضاء النشط.</p>
+      <p class="price-line">حبة بـ <b class="n">120</b> درهم · جوج بـ <b class="n">200</b> درهم</p>
+      <div class="cta">
+        <a class="pill lg" href="#order" data-pick="buds">اطلب دابا</a>
+        <a class="more" href="#features">اكتشف المزايا</a>
+      </div>
+      <div class="stage" role="img" aria-label="سماعتين بيض كيطيرو فوق علبة الشحن المفتوحة، والموجات ديال الصداع كتهدن حداهم">
+        <canvas id="anc-field" aria-hidden="true"></canvas>
+        <div class="layers">
+          <div class="lw" id="lw-base"><img class="base" src="img/h-base.webp" alt="" width="700" height="1161"></div>
+          <div class="lw" id="lw-bud"><img class="bud" src="img/h-bud.webp" alt="" width="700" height="1161"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="story" id="story" aria-label="كيفاش كيخدم عزل الضوضاء">
+    <div class="story-sticky">
+      <canvas id="story-cv" aria-hidden="true"></canvas>
+      <div class="story-copy">
+        <p class="cap">الشارع عالي.</p>
+        <p class="cap">ضغطة وحدة…</p>
+        <p class="cap"><span class="hot">وسكّت.</span></p>
+      </div>
+      <img class="story-bud" id="story-bud" src="img/p-single.webp" alt="سماعة واحدة بيضاء" width="900" height="1165" loading="lazy">
+      <p class="story-note">عزل الضوضاء النشط <span class="lat">ANC</span></p>
+      <div class="story-bar" aria-hidden="true"><i id="story-bar"></i></div>
+    </div>
+  </section>
+
+  <section class="sec" id="features">
+    <div class="wrap">
+      <div class="sec-title">
+        <h2>صغيرة. وكتدير الفرق.</h2>
+        <p>كل ما تحتاجه فسماعة كتجيك لباب الدار.</p>
+      </div>
+      <div class="bento">
+        <article class="tile t-anc">
+          <span class="k lat">ANC</span>
+          <h3>عزل الضوضاء النشط.</h3>
+          <p>صداع الطاكسي، الطرامواي والسوق كينقص بزاف. غير الموسيقى، وغير الصوت اللي بغيتي تسمع.</p>
+          <img src="img/p-single.webp" alt="سماعة واحدة بيضاء مكبرة" width="900" height="1165" loading="lazy">
+        </article>
+        <article class="tile t-mic">
+          <svg class="ico" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="14" y="5" width="12" height="20" rx="6"/><path d="M9 19a11 11 0 0 0 22 0M20 30v6"/></svg>
+          <h3>مايك نقي.</h3>
+          <p>المكالمات واضحة حتى فبلاصة فيها الحس.</p>
+        </article>
+        <article class="tile t-usb">
+          <span class="k">منفذ الشحن</span>
+          <span class="t-big lat">USB-C</span>
+          <p>نفس الكابل ديال الهواتف الجديدة.</p>
+        </article>
+        <article class="tile t-free">
+          <span class="k">التوصيل</span>
+          <span class="t-big"><span class="n">0</span> درهم</span>
+          <p>مجاني لجميع مدن المغرب.</p>
+        </article>
+        <article class="tile t-cod">
+          <svg class="ico" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="10" width="32" height="20" rx="4"/><circle cx="20" cy="20" r="4"/></svg>
+          <h3>كتخلص ملي توصلك.</h3>
+          <p>الدفع نقداً عند الاستلام، بلا بطاقة بنكية.</p>
+        </article>
+        <article class="tile t-pair">
+          <span class="k">عرض جوج</span>
+          <span class="t-big"><span class="n">200</span> درهم</span>
+          <p>جوج سماعات: وحدة ليك ووحدة لمن تبغي.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec alt" id="lineup">
+    <div class="wrap">
+      <div class="sec-title">
+        <h2>اختار ديالك.</h2>
+        <p>كل الطلبيات بتوصيل مجاني ودفع عند الاستلام.</p>
+      </div>
+      <div class="lineup">
+        <article class="prod">
+          <div class="img"><img src="img/ph-buds.webp" alt="علبة الشحن بمنفذ USB-C والسماعتين" width="1200" height="900" loading="lazy"></div>
+          <span class="badge">الأكثر طلباً</span>
+          <h3>سماعات بعزل الضوضاء</h3>
+          <p class="spec">عزل الضوضاء النشط، مايك نقي، علبة شحن USB-C.</p>
+          <p class="price"><b class="n" data-price="buds">120</b> درهم</p>
+          <div class="row"><button class="more" type="button" data-detail="buds">التفاصيل</button><a class="pill" href="#order" data-pick="buds">اطلب</a></div>
+        </article>
+        <article class="prod">
+          <div class="img"><img src="img/ph-iphone.webp" alt="رأس USB-C ورأس Lightning ديال الكابل" width="1200" height="900" loading="lazy"></div>
+          <span class="badge ghost">للآيفون</span>
+          <h3>شاحن سريع للآيفون</h3>
+          <p class="spec">أدابتور <span class="lat">25W</span> وكابل <span class="lat">USB-C</span> إلى <span class="lat">Lightning</span> (متر)، كل واحد فعلبتو.</p>
+          <p class="price"><b class="n" data-price="iphone">110</b> درهم</p>
+          <div class="row"><button class="more" type="button" data-detail="iphone">التفاصيل</button><a class="pill" href="#order" data-pick="iphone">اطلب</a></div>
+        </article>
+        <article class="prod">
+          <div class="img"><img src="img/ph-samsung.webp" alt="أدابتور أسود مع كابل USB-C" width="1200" height="900" loading="lazy"></div>
+          <span class="badge ghost">لسامسونج</span>
+          <h3>شاحن سريع QC 3.0</h3>
+          <p class="spec">متوافق مع سامسونج، حتى <span class="lat">18W</span>، أدابتور مع كابل <span class="lat">USB-C</span> إلى <span class="lat">USB-C</span>.</p>
+          <p class="price"><b class="n" data-price="samsung">110</b> درهم</p>
+          <div class="row"><button class="more" type="button" data-detail="samsung">التفاصيل</button><a class="pill" href="#order" data-pick="samsung">اطلب</a></div>
+        </article>
+        <article class="prod">
+          <div class="img"><img src="img/ph-bundle.webp" alt="السماعات وأدابتور أبيض" width="1200" height="900" loading="lazy"></div>
+          <span class="badge">باقة</span>
+          <h3>السماعات + شاحن الآيفون</h3>
+          <p class="spec">السماعات مع الأدابتور والكابل ديال الآيفون، فطرد واحد.</p>
+          <p class="price"><b class="n" data-price="bundle">200</b> درهم<s class="n" id="bundle-was" style="margin-inline:8px">230</s></p>
+          <div class="row"><button class="more" type="button" data-detail="bundle">التفاصيل</button><a class="pill" href="#order" data-pick="bundle">اطلب</a></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="how">
+    <div class="wrap">
+      <div class="sec-title"><h2>الطلب ساهل.</h2><p>تلت خطوات، والخلاص فالآخر.</p></div>
+      <ol class="steps">
+        <li><b>عمّر الطلبية</b><span>اختار المنتج والكمية، وكتب سميتك، المدينة ورقم الهاتف.</span></li>
+        <li><b>نأكدو معاك</b><span>كنتاصلو بيك فواتساب باش نأكدو العنوان والطلبية.</span></li>
+        <li><b>كتوصلك وكتخلص</b><span>الموزع كيجيبها لباب الدار، وكتخلص ليه نقداً.</span></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="sec alt" id="order">
+    <div class="wrap">
+      <div class="sec-title"><h2>اطلب دابا.</h2><p>عمّر المعلومات، والطلبية كتمشي لواتساب ديالنا.</p></div>
+      <div class="order">
+        <form class="f" id="order-form" novalidate>
+          <label class="full" for="o-product">المنتج
+            <select id="o-product" name="product">
+              <option value="buds">سماعات لاسلكية بعزل الضوضاء</option>
+              <option value="iphone">شاحن سريع للآيفون</option>
+              <option value="samsung">شاحن سريع متوافق مع سامسونج</option>
+              <option value="bundle">باقة: السماعات + شاحن الآيفون</option>
+            </select>
+          </label>
+          <label class="full" for="o-qty">الكمية
+            <span class="qty">
+              <button type="button" id="q-minus" aria-label="نقص واحد">−</button>
+              <input id="o-qty" name="qty" type="number" min="1" max="20" value="1" inputmode="numeric">
+              <button type="button" id="q-plus" aria-label="زيد واحد">+</button>
+            </span>
+          </label>
+          <label for="o-name">الاسم الكامل<input id="o-name" name="name" type="text" autocomplete="name" placeholder="مثلاً: سلمان حسني"></label>
+          <label for="o-phone">رقم الهاتف<input id="o-phone" name="phone" type="tel" autocomplete="tel" placeholder="06 00 00 00 00"></label>
+          <label for="o-city">المدينة<input id="o-city" name="city" type="text" autocomplete="address-level2" placeholder="مثلاً: طنجة"></label>
+          <label for="o-address">الحي والعنوان<input id="o-address" name="address" type="text" autocomplete="street-address" placeholder="الحي، الزنقة، رقم الدار"></label>
+          <p class="err full" id="o-err" role="alert"></p>
+        </form>
+        <aside class="summary" aria-live="polite">
+          <h3>الطلبية ديالك</h3>
+          <div class="line"><span id="s-item">سماعات لاسلكية بعزل الضوضاء</span><b id="s-qty" class="n">×1</b></div>
+          <div class="line"><span>التوصيل</span><span class="free">مجاني</span></div>
+          <div class="total"><span>المجموع</span><span><b class="n" id="s-total">120</b> درهم</span></div>
+          <a class="pill lg" id="send" href="https://wa.me/212710256996" target="_blank" rel="noopener"><svg><use href="#wa"/></svg>صيفط الطلبية فواتساب</a>
+          <small>كيتفتح واتساب برسالة فيها الطلبية ديالك، غير ضغط على «إرسال». الخلاص عند الاستلام.</small>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="faq">
+    <div class="wrap">
+      <div class="sec-title"><h2>أسئلة.</h2></div>
+      <div class="faq">
+        <details><summary>واش التوصيل مجاني لمدينتي؟</summary><p>إيه، التوصيل مجاني لجميع مدن المغرب، بلا حتى درهم زايد.</p></details>
+        <details><summary>كيفاش كنخلص؟</summary><p>كتخلص نقداً للموزع ملي توصلك الطلبية. ما كتخلص حتى حاجة قبل.</p></details>
+        <details><summary>واش السماعات أصلية؟</summary><p>هي نسخة عالية الجودة، فيها عزل الضوضاء النشط والمايك نقي، وكنجربو كل طلبية قبل ما نصيفطوها.</p></details>
+        <details><summary>واش كتخدم مع الأندرويد؟</summary><p>إيه، السماعات كتخدم بالبلوتوث مع الآيفون والأندرويد بجوج.</p></details>
+        <details><summary>إلا جاتني فيها شي مشكلة؟</summary><p>تواصل معانا فواتساب أو فالدايركت ديال إنستغرام، ونلقاو ليك حل.</p></details>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="rowf">
+      <a class="logo" href="#top" aria-label="هاتفي Hatifi"><svg aria-hidden="true"><use href="#logo"/></svg><b>هاتفي</b></a>
+      <div class="contact">
+        <a class="lat" href="https://www.instagram.com/hatifi.ma/" target="_blank" rel="noopener">@hatifi.ma</a>
+        <span>·</span>
+        <span>واتساب: <span class="n" id="phone">+212 710 256 996</span></span>
+        <button class="copy" type="button" id="copy-phone">نسخ الرقم</button>
+      </div>
+    </div>
+    <p>© <span class="n">2026</span> هاتفي — Hatifi. التوصيل مجاني لجميع مدن المغرب والدفع عند الاستلام.</p>
+  </div>
+</footer>
+
+<dialog class="pd" id="pd" aria-labelledby="pd-title">
+  <button class="pd-x" type="button" id="pd-x" aria-label="سدّ">×</button>
+  <div class="pd-in">
+    <div class="pd-gal">
+      <div class="pd-stage">
+        <div class="pd-track" id="pd-track" tabindex="0" aria-label="صور المنتوج"></div>
+        <button class="pd-nav pd-prev" type="button" id="pd-prev" aria-label="الصورة اللي قبل">›</button>
+        <button class="pd-nav pd-next" type="button" id="pd-next" aria-label="الصورة اللي من بعد">‹</button>
+        <span class="pd-count" id="pd-count" aria-hidden="true"></span>
+      </div>
+      <div class="pd-thumbs" id="pd-thumbs"></div>
+    </div>
+    <div class="pd-body">
+      <span class="badge" id="pd-badge"></span>
+      <h2 id="pd-title" tabindex="-1" autofocus style="outline:none"></h2>
+      <p class="pd-price" id="pd-price"></p>
+      <p class="pd-desc" id="pd-desc"></p>
+      <ul class="pd-specs" id="pd-specs"></ul>
+      <ul class="pd-perks"><li>التوصيل مجاني لجميع المدن</li><li>الدفع عند الاستلام</li></ul>
+      <div class="pd-cta">
+        <a class="pill lg" href="#order" id="pd-order" data-pick="buds">اطلب دابا</a>
+        <a class="pill pd-wa" id="pd-wa" href="#" target="_blank" rel="noopener">سول فالواتساب</a>
+      </div>
+    </div>
+  </div>
+</dialog>
+
+<script>
+(() => {
+  const WA = "212710256996";
+  // Prices in dirhams. Edit here to change every price on the page.
+  const P = {
+    buds:    { name: "سماعات لاسلكية بعزل الضوضاء", price: 120, pair: 200 },
+    iphone:  { name: "شاحن الآيفون: أدابتور 25W + كابل Lightning", price: 110 },
+    samsung: { name: "شاحن سريع متوافق مع سامسونج", price: 110 },
+    bundle:  { name: "باقة: السماعات + شاحن الآيفون", price: 200 }
+  };
+  document.querySelectorAll("[data-price]").forEach(el => { el.textContent = P[el.dataset.price].price; });
+  const was = document.getElementById("bundle-was");
+  if (was) was.textContent = P.buds.price + P.iphone.price;
+
+  const $ = id => document.getElementById(id);
+  const sel = $("o-product"), qty = $("o-qty"), send = $("send"), err = $("o-err");
+  const fields = ["o-name", "o-phone", "o-city", "o-address"].map($);
+  const total = (key, q) => { const p = P[key]; return p.pair ? Math.floor(q / 2) * p.pair + (q % 2) * p.price : p.price * q; };
+  const clampQty = () => { let q = parseInt(qty.value, 10); if (!q || q < 1) q = 1; if (q > 20) q = 20; qty.value = q; return q; };
+  const message = () => {
+    const q = clampQty(), key = sel.value;
+    const [name, phone, city, address] = fields.map(f => f.value.trim());
+    return ["سلام هاتفي، بغيت نطلب:", `• ${P[key].name} × ${q}`, `• المجموع: ${total(key, q)} درهم (التوصيل مجاني)`, "",
+      `الاسم: ${name || "—"}`, `الهاتف: ${phone || "—"}`, `المدينة: ${city || "—"}`, `العنوان: ${address || "—"}`].join("\n");
+  };
+  const update = () => {
+    const q = clampQty(), key = sel.value;
+    $("s-item").textContent = P[key].name; $("s-qty").textContent = "×" + q; $("s-total").textContent = total(key, q);
+    send.href = `https://wa.me/${WA}?text=${encodeURIComponent(message())}`;
+  };
+  $("q-minus").addEventListener("click", () => { qty.value = Math.max(1, clampQty() - 1); update(); });
+  $("q-plus").addEventListener("click", () => { qty.value = Math.min(20, clampQty() + 1); update(); });
+  [sel, qty, ...fields].forEach(el => el.addEventListener("input", () => { err.textContent = ""; update(); }));
+  $("order-form").addEventListener("submit", e => e.preventDefault());
+  send.addEventListener("click", e => {
+    const [name, phone, city] = fields.map(f => f.value.trim());
+    if (!name || !city || phone.replace(/\D/g, "").length < 9) {
+      e.preventDefault();
+      err.textContent = !name ? "كتب الاسم الكامل عافاك." : !city ? "كتب المدينة عافاك." : "رقم الهاتف ناقص، كتبو كامل (مثلاً 0612345678).";
+      (!name ? fields[0] : !city ? fields[2] : fields[1]).focus();
+      return;
+    }
+    update();
+  });
+  document.querySelectorAll("[data-pick]").forEach(a => a.addEventListener("click", () => { sel.value = a.dataset.pick; update(); }));
+  $("copy-phone").addEventListener("click", async () => {
+    const btn = $("copy-phone"), text = $("phone").textContent.replace(/\s/g, "");
+    try { await navigator.clipboard.writeText(text); btn.textContent = "تنسخ ✓"; }
+    catch { const r = document.createRange(); r.selectNodeContents($("phone")); const s = getSelection(); s.removeAllRanges(); s.addRange(r); btn.textContent = "حدد ونسخ"; }
+    setTimeout(() => { btn.textContent = "نسخ الرقم"; }, 2000);
+  });
+  update();
+})();
+
+// Hero: noise lines that go quiet as they reach the earbuds (the ANC idea), with slow rings.
+(() => {
+  const cv = document.getElementById("anc-field");
+  if (!cv) return;
+  const ctx = cv.getContext("2d");
+  const still = matchMedia("(prefers-reduced-motion: reduce)");
+  let w = 0, h = 0, dpr = 1, colors = {}, lastColorRead = -1e9;
+  const readColors = () => {
+    const cs = getComputedStyle(document.documentElement);
+    colors = { line: cs.getPropertyValue("--muted").trim() || "#6E6E73", accent: cs.getPropertyValue("--accent").trim() || "#FF5A1F" };
+  };
+  const resize = () => {
+    const r = cv.getBoundingClientRect();
+    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    w = r.width; h = r.height;
+    cv.width = Math.round(w * dpr); cv.height = Math.round(h * dpr);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  };
+  const smooth = (a, b, x) => { const t = Math.min(1, Math.max(0, (x - a) / (b - a))); return t * t * (3 - 2 * t); };
+  const draw = (ms) => {
+    const t = ms / 1000;
+    if (ms - lastColorRead > 1000) { readColors(); lastColorRead = ms; }
+    ctx.clearRect(0, 0, w, h);
+    const cx = w / 2, cy = h * 0.5, R = Math.min(w, h) * 0.30;
+    // rings
+    for (let i = 0; i < 3; i++) {
+      const p = ((t * 0.12) + i / 3) % 1;
+      ctx.beginPath();
+      ctx.arc(cx, cy, R * (0.9 + p * 1.3), 0, Math.PI * 2);
+      ctx.strokeStyle = colors.accent;
+      ctx.globalAlpha = 0.22 * (1 - p);
+      ctx.lineWidth = 1.5;
+      ctx.stroke();
+    }
+    // noise lines
+    const lines = 7;
+    for (let k = 0; k < lines; k++) {
+      const y0 = cy + (k - (lines - 1) / 2) * Math.max(10, h * 0.035);
+      ctx.beginPath();
+      for (let x = 0; x <= w; x += 3) {
+        const d = Math.abs(x - cx);
+        const amp = smooth(R * 0.95, R * 2.1, d) * h * 0.045;
+        const n = Math.sin(x * 0.045 + t * 3.1 + k) * 0.6 + Math.sin(x * 0.11 - t * 4.7 + k * 2) * 0.3 + Math.sin(x * 0.23 + t * 7 + k * 3) * 0.25;
+        const y = y0 + n * amp;
+        x === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+      }
+      const accent = k === 3;
+      ctx.strokeStyle = accent ? colors.accent : colors.line;
+      ctx.globalAlpha = accent ? 0.75 : 0.28;
+      ctx.lineWidth = accent ? 2 : 1.2;
+      ctx.stroke();
+    }
+    ctx.globalAlpha = 1;
+  };
+  let raf = 0, visible = true;
+  const loop = (ms) => { draw(ms); if (!still.matches && visible) raf = requestAnimationFrame(loop); };
+  const start = () => { cancelAnimationFrame(raf); resize(); still.matches ? draw(2000) : (raf = requestAnimationFrame(loop)); };
+  new ResizeObserver(start).observe(cv);
+  new IntersectionObserver(([e]) => { visible = e.isIntersecting; if (visible) start(); }).observe(cv);
+  still.addEventListener?.("change", start);
+  start();
+})();
+
+// Scroll motion: hero bud settles toward the case; the story section goes quiet as you scroll.
+(() => {
+  const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
+  const smooth = (a, b, x) => { const t = clamp((x - a) / (b - a)); return t * t * (3 - 2 * t); };
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)");
+  const hero = document.querySelector(".hero");
+  const lwBud = document.getElementById("lw-bud"), lwBase = document.getElementById("lw-base");
+  const story = document.getElementById("story");
+  const cv = document.getElementById("story-cv"), ctx = cv.getContext("2d");
+  const caps = [...document.querySelectorAll(".story-copy .cap")];
+  const sBud = document.getElementById("story-bud"), bar = document.getElementById("story-bar");
+  let w = 0, h = 0, storyP = 0, storyOn = false, raf = 0;
+
+  const heroScroll = () => {
+    if (reduce.matches) { lwBud.style.transform = lwBase.style.transform = ""; return; }
+    const p = clamp(scrollY / (hero.offsetHeight * 0.6));
+    const e = p * p * (3 - 2 * p);
+    lwBud.style.transform = `translate(${2 * e}%, ${24 * e}%) rotate(${9 * e}deg)`;
+    lwBase.style.transform = `translateY(${-3 * e}%) scale(${1 - 0.03 * e})`;
+  };
+
+  const storyProgress = () => {
+    const r = story.getBoundingClientRect();
+    const total = r.height - innerHeight;
+    return total > 0 ? clamp(-r.top / total) : 0;
+  };
+
+  const sizeCanvas = () => {
+    const r = cv.getBoundingClientRect(), dpr = Math.min(devicePixelRatio || 1, 2);
+    w = r.width; h = r.height; cv.width = Math.round(w * dpr); cv.height = Math.round(h * dpr);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  };
+
+  const drawStory = (ms) => {
+    const t = (reduce.matches ? 2000 : ms) / 1000, p = storyP;
+    ctx.clearRect(0, 0, w, h);
+    const cx = w / 2, cy = h * 0.58;
+    const quiet = smooth(0.3, 0.8, p);               // 0 = loud street, 1 = silence
+    const R = Math.max(w, h) * 0.75 * quiet;
+    const accent = getComputedStyle(document.documentElement).getPropertyValue("--accent").trim() || "#FF5A1F";
+    if (quiet > 0.4) {
+      for (let i = 0; i < 3; i++) {
+        const q = ((t * 0.15) + i / 3) % 1;
+        ctx.beginPath(); ctx.arc(cx, cy, Math.min(w, h) * (0.22 + q * 0.4), 0, Math.PI * 2);
+        ctx.strokeStyle = accent; ctx.globalAlpha = 0.25 * (1 - q) * smooth(0.4, 0.9, quiet); ctx.lineWidth = 1.5; ctx.stroke();
+      }
+    }
+    const lines = 11, gap = Math.max(12, h * 0.03);
+    for (let k = 0; k < lines; k++) {
+      const y0 = cy + (k - (lines - 1) / 2) * gap;
+      ctx.beginPath();
+      for (let x = 0; x <= w; x += 3) {
+        const d = Math.abs(x - cx);
+        const amp = h * 0.05 * (R > 1 ? smooth(R * 0.6, R * 1.1, d) : 1) * (1 - 0.85 * quiet);
+        const n = Math.sin(x * 0.04 + t * 3.1 + k) * 0.55 + Math.sin(x * 0.1 - t * 4.9 + k * 2) * 0.3 + Math.sin(x * 0.21 + t * 7.7 + k * 3) * 0.2;
+        const y = y0 + n * amp;
+        x === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+      }
+      const hot = k === 5;
+      ctx.strokeStyle = hot ? accent : "#8E8E93";
+      ctx.globalAlpha = hot ? 0.85 : 0.3;
+      ctx.lineWidth = hot ? 2.2 : 1.2;
+      ctx.stroke();
+    }
+    ctx.globalAlpha = 1;
+  };
+
+  const storyFrame = () => {
+    const p = storyP;
+    const fades = [
+      1 - smooth(0.26, 0.34, p),
+      smooth(0.30, 0.38, p) * (1 - smooth(0.58, 0.66, p)),
+      smooth(0.62, 0.70, p)
+    ];
+    caps.forEach((c, i) => { c.style.opacity = fades[i]; c.style.transform = reduce.matches ? "" : `translateY(${(1 - fades[i]) * 18}px)`; });
+    sBud.style.transform = reduce.matches ? "" : `rotate(${-14 + 22 * p}deg) scale(${0.88 + 0.22 * p})`;
+    bar.style.transform = `scaleX(${p})`;
+  };
+
+  const loop = (ms) => { drawStory(ms); if (storyOn && !reduce.matches) raf = requestAnimationFrame(loop); };
+  let ticking = false;
+  const onScroll = () => {
+    if (ticking) return; ticking = true;
+    requestAnimationFrame(() => {
+      ticking = false;
+      heroScroll();
+      storyP = storyProgress(); storyFrame();
+      if (reduce.matches && storyOn) drawStory(0);
+    });
+  };
+  addEventListener("scroll", onScroll, { passive: true });
+  addEventListener("resize", () => { sizeCanvas(); onScroll(); });
+  new ResizeObserver(sizeCanvas).observe(cv);
+  new IntersectionObserver(([e]) => {
+    storyOn = e.isIntersecting; cancelAnimationFrame(raf);
+    if (storyOn) { sizeCanvas(); reduce.matches ? drawStory(0) : (raf = requestAnimationFrame(loop)); }
+  }).observe(story);
+  sizeCanvas(); onScroll();
+})();
+
+// Product detail window
+(() => {
+  const D = {
+    buds: { badge: "الأكثر طلباً", title: "سماعات بعزل الضوضاء",
+      imgs: [["img/g/b1.webp","علبة الشحن والسماعتين فوق الخشب"],["img/g/b2.webp","السماعتين فوق الحجر"],["img/g/b3.webp","علبة الشحن مفتوحة"],["img/g/b4.webp","العلبة مفتوحة والسماعتين فوق الرخام"],["img/g/b5.webp","السماعات حدا التيليفون"]],
+      desc: "سماعات لاسلكية بعزل الضوضاء النشط: ضغطة وحدة والصداع ديال الشارع كيتنقص. نسخة عالية الجودة، خفيفة فالودن ومريحة للاستعمال اليومي.",
+      specs: ["عزل الضوضاء النشط <span class=\"lat\">ANC</span>","مايك واضح للمكالمات","علبة شحن بمنفذ <span class=\"lat\">USB-C</span>","كتخدم مع الآيفون والأندرويد بالبلوتوث"],
+      extra: P => `جوج بـ <span class="n">${P.pair}</span> درهم` },
+    iphone: { badge: "للآيفون", title: "شاحن سريع للآيفون",
+      imgs: [["img/g/i1.webp","رأس USB-C ورأس Lightning"],["img/g/i4.webp","الأدابتور مع العلبة ديالو"],["img/g/i5.webp","الأدابتور الأبيض فوق الرخام"],["img/g/i6.webp","الكابل ملفوف حدا العلبة"],["img/g/i7.webp","الكابل والعلبة فوق الرخام"],["img/g/i8.webp","الكابل كيشارجي التيليفون من البيسي"],["img/g/i9.webp","الشاحن فالبريز والتيليفون كيتشارجا"]],
+      desc: "طقم شحن كامل للآيفون: أدابتور بقوة 25W وكابل USB-C إلى Lightning. الأدابتور والكابل كيجيو مع بعض، كل واحد فعلبتو.",
+      specs: ["أدابتور <span class=\"lat\">25W</span> بمنفذ <span class=\"lat\">USB-C</span>","كابل <span class=\"lat\">USB-C</span> إلى <span class=\"lat\">Lightning</span>، طوله متر","مناسب للآيفون اللي فيه منفذ <span class=\"lat\">Lightning</span>","بريز بجوج سنان، كتدخل فالبريزات ديال المغرب"] },
+    samsung: { badge: "لسامسونج", title: "شاحن سريع QC 3.0",
+      imgs: [["img/g/s1.webp","الأدابتور والكابل حدا العلبة"],["img/g/s3.webp","العلبة والأدابتور والكابل فوق الرخام"],["img/g/s4.webp","منفذ USB-C والكابل"],["img/g/s5.webp","الشاحن فالبريز"]],
+      desc: "شاحن سريع متوافق مع سامسونج وأغلب هواتف الأندرويد اللي فيهم منفذ USB-C. فيه الأدابتور والكابل.",
+      specs: ["شحن سريع <span class=\"lat\">Quick Charge 3.0</span>، حتى <span class=\"lat\">18W</span>","مخرج <span class=\"lat\">USB-C</span>","كابل <span class=\"lat\">USB-C</span> إلى <span class=\"lat\">USB-C</span>","حماية من التيار الزائد والدارة القصيرة"] },
+    bundle: { badge: "باقة", title: "السماعات + شاحن الآيفون",
+      imgs: [["img/g/p1.webp","الأدابتور والسماعتين فوق الحجر"],["img/g/b1.webp","علبة الشحن والسماعتين"],["img/g/i1.webp","رأس USB-C ورأس Lightning"],["img/g/i4.webp","الأدابتور مع العلبة ديالو"],["img/g/i6.webp","الكابل ملفوف"]],
+      desc: "السماعات بعزل الضوضاء مع طقم شحن الآيفون (أدابتور 25W + كابل Lightning)، فطرد واحد وبثمن أقل.",
+      specs: ["سماعات بعزل الضوضاء النشط <span class=\"lat\">ANC</span>","أدابتور <span class=\"lat\">25W</span> بمنفذ <span class=\"lat\">USB-C</span>","كابل <span class=\"lat\">USB-C</span> إلى <span class=\"lat\">Lightning</span>، متر"],
+      extra: (P, was) => was ? `بلاصة <s class="n">${was}</s> درهم` : "" }
+  };
+  const $ = id => document.getElementById(id);
+  const dlg = $("pd"), track = $("pd-track"), thumbs = $("pd-thumbs"), prev = $("pd-prev"), next = $("pd-next");
+  if (!dlg || !dlg.showModal) return;
+  const priceOf = k => parseInt(document.querySelector(`[data-price="${k}"]`)?.textContent || "0", 10);
+  let n = 0, cur = 0, opener = null;
+
+  const go = i => { cur = Math.max(0, Math.min(n - 1, i)); track.children[cur]?.scrollIntoView({ block: "nearest", inline: "center" }); mark(); };
+  const mark = () => {
+    [...thumbs.children].forEach((b, i) => b.setAttribute("aria-current", i === cur));
+    prev.disabled = cur === 0; next.disabled = cur === n - 1;
+    $("pd-count").textContent = `${cur + 1} / ${n}`;
+    thumbs.children[cur]?.scrollIntoView({ block: "nearest", inline: "nearest" });
+  };
+  track.addEventListener("scroll", () => {
+    const w = track.clientWidth; if (!w) return;
+    const i = Math.round(Math.abs(track.scrollLeft) / w);
+    if (i !== cur) { cur = i; mark(); }
+  }, { passive: true });
+  prev.addEventListener("click", () => go(cur - 1));
+  next.addEventListener("click", () => go(cur + 1));
+  track.addEventListener("keydown", e => { if (e.key === "ArrowLeft") go(cur + 1); if (e.key === "ArrowRight") go(cur - 1); });
+
+  const open = (k, from) => {
+    const d = D[k]; if (!d) return;
+    opener = from;
+    $("pd-badge").textContent = d.badge; $("pd-badge").classList.toggle("ghost", k === "iphone" || k === "samsung"); $("pd-title").textContent = d.title;
+    const p = priceOf(k), was = k === "bundle" ? priceOf("buds") + priceOf("iphone") : 0;
+    const extra = d.extra ? d.extra({ pair: k === "buds" ? 200 : 0 }, was) : "";
+    $("pd-price").innerHTML = `<span class="n">${p}</span> درهم${extra ? `<small>${extra}</small>` : ""}`;
+    $("pd-desc").textContent = d.desc;
+    $("pd-specs").innerHTML = d.specs.map(x => `<li>${x}</li>`).join("");
+    track.innerHTML = d.imgs.map(([src, alt]) => `<img src="${src}" alt="${alt}" width="1000" height="1000" draggable="false">`).join("");
+    thumbs.innerHTML = d.imgs.map(([src, alt], i) => `<button type="button" aria-label="صورة ${i + 1}"><img src="${src}" alt=""></button>`).join("");
+    [...thumbs.children].forEach((b, i) => b.addEventListener("click", () => go(i)));
+    n = d.imgs.length; cur = 0; track.scrollLeft = 0; mark();
+    $("pd-order").dataset.pick = k;
+    $("pd-wa").href = `https://wa.me/212710256996?text=${encodeURIComponent("سلام هاتفي، عندي سؤال على: " + d.title)}`;
+    dlg.showModal(); dlg.scrollTop = 0;
+  };
+  const close = () => {
+    if (!dlg.open || dlg.classList.contains("closing")) return;
+    if (matchMedia("(prefers-reduced-motion: reduce)").matches) { dlg.close(); return; }
+    dlg.classList.add("closing");
+    setTimeout(() => { dlg.classList.remove("closing"); dlg.close(); }, 240);
+  };
+  dlg.addEventListener("close", () => opener?.focus?.({ preventScroll: true }));
+  dlg.addEventListener("cancel", e => { e.preventDefault(); close(); });
+  dlg.addEventListener("click", e => { if (e.target === dlg) close(); });
+  $("pd-x").addEventListener("click", close);
+  $("pd-order").addEventListener("click", () => { dlg.close(); });
+
+  document.querySelectorAll(".prod").forEach(card => {
+    const k = card.querySelector("[data-detail]")?.dataset.detail; if (!k) return;
+    card.querySelector("[data-detail]").addEventListener("click", e => open(k, e.currentTarget));
+    card.querySelectorAll(".img, h3").forEach(el => el.addEventListener("click", () => open(k, card.querySelector("[data-detail]"))));
+  });
+})();
+</script>
+
+</html>
